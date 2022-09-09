@@ -91,7 +91,7 @@ const Base = ({
       </Head>
       <Header />
       {/* main site */}
-      <main className="bg-blue-300">{children}</main>
+      <main className="bg-secondary">{children}</main>
       <Footer />
     </>
   );

@@ -70,7 +70,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoFacebook />
+            <IoLogoFacebook color={"black"} />
           </a>
         </li>
       )}
@@ -82,7 +82,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoTwitter />
+            <IoLogoTwitter color={"black"} />
           </a>
         </li>
       )}
@@ -94,7 +94,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoInstagram />
+            <IoLogoInstagram color={"black"} />
           </a>
         </li>
       )}
@@ -106,7 +106,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoYoutube />
+            <IoLogoYoutube color={"black"} />
           </a>
         </li>
       )}
@@ -118,7 +118,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoLinkedin />
+            <IoLogoLinkedin color={"black"} />
           </a>
         </li>
       )}
@@ -130,7 +130,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoGithub />
+            <IoLogoGithub color={"black"} />
           </a>
         </li>
       )}
@@ -142,7 +142,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoGitlab />
+            <IoLogoGitlab color={"black"} />
           </a>
         </li>
       )}
@@ -154,7 +154,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoMedium />
+            <IoLogoMedium color={"black"} />
           </a>
         </li>
       )}
@@ -166,7 +166,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoCodepen />
+            <IoLogoCodepen color={"black"} />
           </a>
         </li>
       )}
@@ -178,7 +178,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoBitbucket />
+            <IoLogoBitbucket color={"black"} />
           </a>
         </li>
       )}
@@ -190,7 +190,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoDribbble />
+            <IoLogoDribbble color={"black"} />
           </a>
         </li>
       )}
@@ -202,7 +202,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoBehance />
+            <IoLogoBehance color={"black"} />
           </a>
         </li>
       )}
@@ -214,7 +214,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoPinterest />
+            <IoLogoPinterest color={"black"} />
           </a>
         </li>
       )}
@@ -226,7 +226,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoSoundcloud />
+            <IoLogoSoundcloud color={"black"} />
           </a>
         </li>
       )}
@@ -238,7 +238,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoTumblr />
+            <IoLogoTumblr color={"black"} />
           </a>
         </li>
       )}
@@ -250,7 +250,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoReddit />
+            <IoLogoReddit color={"black"} />
           </a>
         </li>
       )}
@@ -262,7 +262,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoVk />
+            <IoLogoVk color={"black"} />
           </a>
         </li>
       )}
@@ -274,7 +274,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoWhatsapp />
+            <IoLogoWhatsapp color={"black"} />
           </a>
         </li>
       )}
@@ -286,7 +286,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoSnapchat />
+            <IoLogoSnapchat color={"black"} />
           </a>
         </li>
       )}
@@ -298,7 +298,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoVimeo />
+            <IoLogoVimeo color={"black"} />
           </a>
         </li>
       )}
@@ -310,7 +310,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoTiktok />
+            <IoLogoTiktok color={"black"} />
           </a>
         </li>
       )}
@@ -322,7 +322,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoFoursquare />
+            <IoLogoFoursquare color={"black"} />
           </a>
         </li>
       )}
@@ -334,7 +334,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoSkype />
+            <IoLogoSkype color={"black"} />
           </a>
         </li>
       )}
@@ -346,7 +346,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoGlobeOutline />
+            <IoGlobeOutline color={"black"} />
           </a>
         </li>
       )}
@@ -358,7 +358,7 @@ const Social = ({ source, className }) => {
             target="_blank"
             rel="noopener noreferrer nofollow"
           >
-            <IoLogoRss />
+            <IoLogoRss color={"black"} />
           </a>
         </li>
       )}

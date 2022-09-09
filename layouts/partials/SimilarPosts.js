@@ -18,11 +18,11 @@ const SimilarPosts = ({ posts }) => {
               layout="responsive"
             />
           )}
-          <ul className="mt-4 text-text">
-            <li className="mb-2 mr-4 inline-block">
+          <ul className="mt-4 text-white">
+            <li className="mb-2 mr-4 inline-block text-white">
               {dateFormat(post.frontmatter.date)}
             </li>
-            <li className="mb-2 mr-4 inline-block">
+            <li className="mb-2 mr-4 inline-block text-white">
               <ul>
                 {post.frontmatter.categories.map((category, i) => (
                   <li className="inline-block" key={`category-${i}`}>

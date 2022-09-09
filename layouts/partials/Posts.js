@@ -24,7 +24,7 @@ const Posts = ({ posts, authors, className }) => {
               priority={i === 0 ? true : false}
             />
           )}
-          <ul className="mt-4 text-text">
+          <ul className="mt-4 text-white">
             <li className="mb-2 mr-4 inline-block">
               {authors
                 .filter((author) =>
@@ -49,12 +49,14 @@ const Posts = ({ posts, authors, className }) => {
                           />
                         </span>
                       )}
-                      <span>{author.frontmatter.title}</span>
+                      <span className="text-white">
+                        {author.frontmatter.title}
+                      </span>
                     </a>
                   </Link>
                 ))}
             </li>
-            <li className="mb-2 mr-4 inline-block">
+            <li className="mb-2 mr-4 inline-block text-white">
               {dateFormat(post.frontmatter.date)}
             </li>
             <li className="mb-2 mr-4 inline-block">
@@ -62,12 +64,17 @@ const Posts = ({ posts, authors, className }) => {
                 {post.frontmatter.categories.map((category, i) => (
                   <li className="inline-block" key={`category-${i}`}>
                     <Link href={`/categories/${slugify(category)}`} passHref>
-                      <a className="mr-3 hover:text-primary">
+                      <a className="mr-3 text-white hover:text-primary">
                         &#9635; {humanize(category)}
                       </a>
                     </Link>
                   </li>
                 ))}
+                {post.frontmatter.time && (
+                  <li className="mb-2 mr-4 inline-block">
+                    Reading Time : {post.frontmatter.time}
+                  </li>
+                )}
               </ul>
             </li>
           </ul>
@@ -78,7 +85,7 @@ const Posts = ({ posts, authors, className }) => {
               </a>
             </Link>
           </h3>
-          <p className="text-text">
+          <p className="text-white">
             {post.content && post.content.slice(0, Number(summary_length))}...
           </p>
         </div>

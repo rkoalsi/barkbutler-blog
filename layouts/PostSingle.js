@@ -10,7 +10,7 @@ import SimilarPosts from "./partials/SimilarPosts";
 
 const PostSingle = ({ post, posts, authors, slug }) => {
   const { frontmatter, content, mdxContent } = post;
-  let { description, title, date, image, categories, tags } = frontmatter;
+  let { description, title, date, image, categories, tags, time } = frontmatter;
   description = description ? description : content.slice(0, 120);
   const similarPosts = similerItems(post, posts, slug);
 
@@ -20,7 +20,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
         <div className="container">
           <article className="text-center">
             {markdownify(title, "h1", "h2")}
-            <ul className="mt-4 mb-8 text-text">
+            <ul className="mt-4 mb-8 text-white">
               <li className="mb-2 mr-4 inline-block">
                 {authors
                   .filter((author) =>
@@ -62,6 +62,9 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                       </Link>
                     </li>
                   ))}
+                  <li className="mb-2 mr-4 inline-block">
+                    Reading Time : {time}
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -75,7 +78,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                 className="rounded-lg"
               />
             )}
-            <div className="content mb-16 text-left">
+            <div className="content mb-16 text-left text-white marker:text-white">
               <MDXRemote {...mdxContent} components={shortcodes} />
             </div>
             <div className="flex flex-wrap items-center justify-between">
@@ -83,7 +86,7 @@ const PostSingle = ({ post, posts, authors, slug }) => {
                 {tags.map((tag, i) => (
                   <li className="inline-block" key={`tag-${i}`}>
                     <Link href={`/tags/${slugify(tag)}`} passHref>
-                      <a className="bg-theme-light block rounded-lg px-4 py-2 font-semibold text-dark hover:text-primary">
+                      <a className="block rounded-lg bg-theme-light px-4 py-2 font-semibold text-dark hover:text-primary">
                         #{humanize(tag)}
                       </a>
                     </Link>
