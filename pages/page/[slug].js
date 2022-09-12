@@ -9,7 +9,7 @@ const { blog_folder } = config.settings;
 const BlogPagination = ({ posts, authors, currentPage, pagination }) => {
   const indexOfLastPost = currentPage * pagination;
   const indexOfFirstPost = indexOfLastPost - pagination;
-  const totalPages = Math.round(posts.length / pagination);
+  const totalPages = Math.ceil(posts.length / pagination);
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
@@ -34,7 +34,7 @@ export default BlogPagination;
 export const getStaticPaths = () => {
   const allSlug = getSinglePagesSlug(`content/${blog_folder}`);
   const { pagination } = config.settings;
-  const totalPages = Math.round(allSlug.length / pagination);
+  const totalPages = Math.ceil(allSlug.length / pagination);
   let paths = [];
 
   for (let i = 1; i < totalPages; i++) {
@@ -57,7 +57,6 @@ export const getStaticProps = async ({ params }) => {
   const { pagination } = config.settings;
   const posts = getSinglePages(`content/${blog_folder}`);
   const authors = getSinglePages("content/authors");
-
   return {
     props: {
       pagination: pagination,

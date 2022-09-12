@@ -5,7 +5,6 @@ const Pagination = ({ section, currentPage, totalPages }) => {
   const indexPageLink = currentPage === 2;
   const hasPrevPage = currentPage > 1;
   const hasNextPage = totalPages > currentPage;
-
   let pageList = [];
   for (let i = 1; i <= totalPages; i++) {
     pageList.push(i);
@@ -63,7 +62,6 @@ const Pagination = ({ section, currentPage, totalPages }) => {
               </svg>
             </span>
           )}
-
           {/* page index */}
           {pageList.map((pagination, i) => (
             <React.Fragment key={`page-${i}`}>

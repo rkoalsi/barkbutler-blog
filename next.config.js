@@ -4,6 +4,9 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ["miro.medium.com"],
+  },
 };
 
 module.exports = nextConfig;

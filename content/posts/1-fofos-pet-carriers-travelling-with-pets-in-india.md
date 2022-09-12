@@ -7,7 +7,7 @@ time: "7 minutes 45 seconds"
 authors: ["Keni"]
 tags: ["pet carrier"]
 draft: false
-categories: ["pet carrier"]
+categories: ["Pet Carrier"]
 ---
 
 Let me paint you a picture; you are travelling with your dog in your car. The sky is clear, the wind is rising, and the roads are empty for the most part. You are focussed on the road whilst your dog is in the back, unleashed and confused, tagging along for the ride. There is a soft swerve, the car rumbles under the gravel of the road; there is a brief panic that falls over you and you immediately check up on your dog. Your dog is fine but rattled. You slowly resume driving; concerned and grateful.

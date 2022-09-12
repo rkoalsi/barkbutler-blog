@@ -29,7 +29,7 @@ const Posts = ({ posts, authors, className }) => {
               {authors
                 .filter((author) =>
                   post.frontmatter.authors
-                    .map((author) => slugify(author))
+                    ?.map((author) => slugify(author))
                     .includes(slugify(author.frontmatter.title))
                 )
                 .map((author, i) => (
