@@ -2,7 +2,7 @@
 title: "FOFOS Pet Carriers : Travelling with pets in India."
 description: Pet carriers approved for travel in India."
 date: 2022-09-09
-image: "/images/posts/01.jpg"
+image: "/images/posts/carrier.png"
 time: "7 minutes 45 seconds"
 authors: ["Keni"]
 tags: ["pet carrier"]

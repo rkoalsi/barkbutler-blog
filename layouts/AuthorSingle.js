@@ -29,7 +29,7 @@ const AuthorSingle = ({ frontmatter, content, mdxContent }) => {
             )}
             {markdownify(title, "h1", "h2 mb-8")}
             <Social source={social} className="social-icons-simple" />
-            <div className="content">
+            <div className="content text-white">
               <MDXRemote {...mdxContent} components={shortcodes} />
             </div>
           </div>

@@ -1,7 +1,7 @@
 ---
 title: "BarkButler’s guide to the doggo poop galaxy"
 description: "#DontPoopAndRun"
-image: "/images/posts/3.jpeg"
+image: "/images/posts/poop.png"
 time: "3 minutes"
 date: 2021-05-14T16:56:47+06:00
 draft: false
