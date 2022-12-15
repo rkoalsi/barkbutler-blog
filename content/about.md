@@ -10,6 +10,7 @@ social:
   facebook: "https://www.facebook.com/barkbutler"
   instagram: "https://www.instagram.com/barkbutler"
   website: "https://www.pupscribe.in/"
+  youtube: ""
 ---
 
 We are a dog and cat products company that thinks beyond the usual idea of toys and pets, towards the mentally enriching idea of toys, pets and YOU!A content writer with over 12 years experience working across brand identity, publishing and digital products.
