@@ -1,51 +1,65 @@
-import config from "@config/config.json";
 import Base from "@layouts/Baseof";
-import { getSinglePages } from "@lib/contentParser";
-import { getTaxonomy } from "@lib/taxonomyParser";
-import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
-const { blog_folder } = config.settings;
+import { fetchPosts, fetchTags } from "@lib/api";
+import { humanize } from "@lib/utils/textConverter";
 
-// tag page
-const Tag = ({ tag, posts, authors }) => {
+const Tag = ({ tag, posts }) => {
   return (
-    <Base title={tag}>
-      <div className="section">
-        <div className="container">
-          <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{tag}</span> tag
+    <Base title={`#${humanize(tag)} — BarkButler Blog`}>
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+        <div className="container px-4 py-8 md:py-10 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
+            Tag
+          </p>
+          <h1 className="text-2xl sm:text-h2-sm md:text-h2 font-bold text-dark dark:text-gray-100">
+            #{humanize(tag)}
           </h1>
-          <Posts posts={posts} authors={authors} />
+          <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+            {posts.length} {posts.length === 1 ? "post" : "posts"}
+          </p>
         </div>
       </div>
+
+      <section className="py-8 md:py-14">
+        <div className="container px-4">
+          {posts.length > 0 ? (
+            <Posts posts={posts} />
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-gray-400 dark:text-gray-600">No posts with this tag yet.</p>
+            </div>
+          )}
+        </div>
+      </section>
     </Base>
   );
 };
 
 export default Tag;
 
-// tag page routes
-export const getStaticPaths = () => {
-  const allCategories = getTaxonomy(`content/${blog_folder}`, "tags");
-
-  const paths = allCategories.map((tag) => ({
-    params: {
-      tag: tag,
-    },
-  }));
-
-  return { paths, fallback: false };
+export const getStaticPaths = async () => {
+  try {
+    const tags = await fetchTags();
+    return {
+      paths: tags.map((tag) => ({
+        params: { tag: tag.toLowerCase().replace(/\s+/g, "-") },
+      })),
+      fallback: "blocking",
+    };
+  } catch {
+    return { paths: [], fallback: "blocking" };
+  }
 };
 
-// tag page data
-export const getStaticProps = ({ params }) => {
-  const posts = getSinglePages(`content/${blog_folder}`);
-  const filterPosts = posts.filter((post) =>
-    post.frontmatter.tags.find((tag) => slugify(tag).includes(params.tag))
-  );
-  const authors = getSinglePages("content/authors");
-
-  return {
-    props: { posts: filterPosts, tag: params.tag, authors: authors },
-  };
+export const getStaticProps = async ({ params }) => {
+  const { tag } = params;
+  try {
+    const data = await fetchPosts({ tag, limit: 100 });
+    return {
+      props: { tag, posts: data.posts || [] },
+      revalidate: 300,
+    };
+  } catch {
+    return { props: { tag, posts: [] }, revalidate: 60 };
+  }
 };

@@ -5,6 +5,7 @@
         "primary": "#9da5fd",
         "secondary": "#AE6BF9",
         "custom_yellow": "#FFDA34",
+         "custom_yellow_dark": "#d99e30", 
         "body": "#fff",
         "border": "#D5D5D5",
         "theme_light": "#FAFAFA",

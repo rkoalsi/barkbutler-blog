@@ -1,20 +1,34 @@
-import config from "@config/config.json";
+import Base from "@layouts/Baseof";
 import NotFound from "@layouts/404";
 import About from "@layouts/About";
-import Base from "@layouts/Baseof";
 import Contact from "@layouts/Contact";
 import Default from "@layouts/Default";
 import PostSingle from "@layouts/PostSingle";
-import {
-  getRegularPage,
-  getRegularPageSlug,
-  getSinglePages,
-  getSinglePagesSlug,
-} from "@lib/contentParser";
-const { blog_folder } = config.settings;
+import { fetchPost } from "@lib/api";
+import { getRegularPage } from "@lib/contentParser";
 
-// for all regular pages
-const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
+// Handles both blog posts (from API) and regular markdown pages (about, contact, etc.)
+const RegularPages = ({ type, post, data, slug }) => {
+  if (type === "post" && post) {
+    return (
+      <Base
+        title={post.title}
+        description={post.description}
+        image={post.image}
+      >
+        <PostSingle post={post} />
+      </Base>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Base>
+        <NotFound data={{ frontmatter: { title: "Not Found" }, content: "" }} />
+      </Base>
+    );
+  }
+
   const { title, meta_title, description, image, noindex, canonical, layout } =
     data.frontmatter;
   const { content } = data;
@@ -22,16 +36,13 @@ const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
   return (
     <Base
       title={title}
-      description={description ? description : content.slice(0, 120)}
+      description={description || content.slice(0, 120)}
       meta_title={meta_title}
       image={image}
       noindex={noindex}
       canonical={canonical}
     >
-      {/* single post */}
-      {postSlug.includes(slug) ? (
-        <PostSingle slug={slug} post={data} authors={authors} posts={posts} />
-      ) : layout === "404" ? (
+      {layout === "404" ? (
         <NotFound data={data} />
       ) : layout === "about" ? (
         <About data={data} />
@@ -43,41 +54,27 @@ const RegularPages = ({ slug, data, postSlug, authors, posts }) => {
     </Base>
   );
 };
+
 export default RegularPages;
 
-// for regular page routes
-export const getStaticPaths = async () => {
-  const slugs = getRegularPageSlug("content");
-  const paths = slugs.map((slug) => ({
-    params: {
-      regular: slug,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-// for regular page data
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const { regular } = params;
-  const allPages = await getRegularPage(regular);
-  // get posts folder slug for filtering
-  const postSlug = getSinglePagesSlug(`content/${blog_folder}`);
-  // aughor data
-  const authors = getSinglePages("content/authors");
-  // all single pages
-  const posts = getSinglePages(`content/${blog_folder}`);
 
-  return {
-    props: {
-      slug: regular,
-      data: allPages,
-      postSlug: postSlug,
-      authors: authors,
-      posts: posts,
-    },
-  };
+  // 1. Try to fetch as a blog post from the API
+  try {
+    const post = await fetchPost(regular);
+    if (post) {
+      return { props: { type: "post", post, slug: regular } };
+    }
+  } catch (err) {
+    // Not found or API error — fall through to markdown pages
+  }
+
+  // 2. Fall back to regular markdown pages (about, contact, etc.)
+  try {
+    const data = await getRegularPage(regular);
+    return { props: { type: "page", data, slug: regular } };
+  } catch (err) {
+    return { props: { type: "notfound", slug: regular } };
+  }
 };

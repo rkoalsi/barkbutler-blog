@@ -1,9 +1,11 @@
 html {
   @apply text-base;
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-body font-primary font-normal leading-relaxed text-white;
+  @apply bg-gray-50 dark:bg-gray-900 font-primary font-normal leading-relaxed text-dark dark:text-gray-100;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -12,7 +14,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-primary font-bold leading-tight text-white;
+  @apply font-primary font-bold leading-tight text-dark dark:text-gray-100;
 }
 
 h1,

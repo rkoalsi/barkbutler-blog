@@ -1,17 +1,12 @@
 import { createContext, useContext } from "react";
-import posts from "../json/posts.json";
 
-const SearchContext = createContext();
+// Search is now handled via API calls directly in the search page.
+const SearchContext = createContext({ posts: [] });
 
-export const JsonContext = ({ children }) => {
-  const state = {
-    posts,
-  };
-  return (
-    <SearchContext.Provider value={state}>{children}</SearchContext.Provider>
-  );
-};
+export const JsonContext = ({ children }) => (
+  <SearchContext.Provider value={{ posts: [] }}>
+    {children}
+  </SearchContext.Provider>
+);
 
-export const useSearchContext = () => {
-  return useContext(SearchContext);
-};
+export const useSearchContext = () => useContext(SearchContext);

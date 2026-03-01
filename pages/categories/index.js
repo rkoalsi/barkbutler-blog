@@ -1,27 +1,34 @@
-import config from "@config/config.json";
 import Base from "@layouts/Baseof";
-import { humanize, markdownify } from "@lib/utils/textConverter";
-import { getTaxonomy } from "@lib/taxonomyParser";
+import { fetchCategories } from "@lib/api";
+import { humanize } from "@lib/utils/textConverter";
 import Link from "next/link";
-const { blog_folder } = config.settings;
 
 const Categories = ({ categories }) => {
   return (
-    <Base title={"categories"}>
-      <section className="section">
-        <div className="container text-center">
-          {markdownify("Categories", "h1", "h2 mb-16")}
-          <ul className="space-x-4">
+    <Base title="Categories — BarkButler Blog">
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+        <div className="container px-4 py-8 md:py-10 text-center">
+          <h1 className="text-2xl sm:text-h2-sm md:text-h2 font-bold text-dark dark:text-gray-100">
+            Categories
+          </h1>
+        </div>
+      </div>
+
+      <section className="py-8 md:py-16">
+        <div className="container px-4">
+          <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category, i) => (
-              <li key={`category-${i}`} className="inline-block">
-                <Link href={`/categories/${category}`} passHref>
-                  <a className="bg-theme-light rounded-lg px-4 py-2 text-dark transition hover:bg-primary hover:text-white">
-                    &#8226; {humanize(category)}
-                  </a>
-                </Link>
-              </li>
+              <Link
+                key={i}
+                href={`/categories/${category.toLowerCase().replace(/\s+/g, "-")}`}
+                passHref
+              >
+                <a className="px-5 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 font-medium hover:bg-primary hover:text-white hover:border-primary dark:hover:border-primary transition-colors shadow-sm dark:shadow-none">
+                  {humanize(category)}
+                </a>
+              </Link>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
     </Base>
@@ -30,12 +37,11 @@ const Categories = ({ categories }) => {
 
 export default Categories;
 
-export const getStaticProps = () => {
-  const categories = getTaxonomy(`content/${blog_folder}`, "categories");
-
-  return {
-    props: {
-      categories: categories,
-    },
-  };
+export const getStaticProps = async () => {
+  try {
+    const categories = await fetchCategories();
+    return { props: { categories }, revalidate: 300 };
+  } catch {
+    return { props: { categories: [] }, revalidate: 60 };
+  }
 };

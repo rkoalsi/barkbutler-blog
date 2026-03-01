@@ -23,6 +23,7 @@ const Logo = () => {
             src={logo}
             alt={title}
             priority
+            className="brightness-0 dark:filter-none"
           />
         ) : logo_text ? (
           logo_text

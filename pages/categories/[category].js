@@ -1,54 +1,63 @@
-import config from "@config/config.json";
 import Base from "@layouts/Baseof";
-import { getSinglePages } from "@lib/contentParser";
-import { getTaxonomy } from "@lib/taxonomyParser";
-import { slugify } from "@lib/utils/textConverter";
 import Posts from "@partials/Posts";
-const { blog_folder } = config.settings;
+import { fetchPosts, fetchCategories } from "@lib/api";
+import { humanize } from "@lib/utils/textConverter";
 
-// category page
-const Category = ({ category, posts, authors }) => {
+const Category = ({ category, posts }) => {
   return (
-    <Base title={category}>
-      <div className="section">
-        <div className="container">
-          <h1 className="h2 mb-8 text-center">
-            Showing posts from <span className="text-primary">{category}</span>{" "}
-            category
+    <Base title={`${humanize(category)} — BarkButler Blog`}>
+      <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+        <div className="container px-4 py-8 md:py-10 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">
+            Category
+          </p>
+          <h1 className="text-2xl sm:text-h2-sm md:text-h2 font-bold text-dark dark:text-gray-100">
+            {humanize(category)}
           </h1>
-          <Posts posts={posts} authors={authors} />
+          <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
+            {posts.length} {posts.length === 1 ? "post" : "posts"}
+          </p>
         </div>
       </div>
+
+      <section className="py-8 md:py-14">
+        <div className="container px-4">
+          {posts.length > 0 ? (
+            <Posts posts={posts} />
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-gray-400">No posts in this category yet.</p>
+            </div>
+          )}
+        </div>
+      </section>
     </Base>
   );
 };
 
 export default Category;
 
-// category page routes
-export const getStaticPaths = () => {
-  const allCategories = getTaxonomy(`content/${blog_folder}`, "categories");
-
-  const paths = allCategories.map((category) => ({
-    params: {
-      category: category,
-    },
-  }));
-
-  return { paths, fallback: false };
+export const getStaticPaths = async () => {
+  try {
+    const categories = await fetchCategories();
+    return {
+      paths: categories.map((cat) => ({ params: { category: cat.toLowerCase().replace(/\s+/g, "-") } })),
+      fallback: "blocking",
+    };
+  } catch {
+    return { paths: [], fallback: "blocking" };
+  }
 };
 
-// category page data
-export const getStaticProps = ({ params }) => {
-  const posts = getSinglePages(`content/${blog_folder}`);
-  const filterPosts = posts.filter((post) =>
-    post.frontmatter.categories.find((category) =>
-      slugify(category).includes(params.category)
-    )
-  );
-  const authors = getSinglePages("content/authors");
-
-  return {
-    props: { posts: filterPosts, category: params.category, authors: authors },
-  };
+export const getStaticProps = async ({ params }) => {
+  const { category } = params;
+  try {
+    const data = await fetchPosts({ category, limit: 100 });
+    return {
+      props: { category, posts: data.posts || [] },
+      revalidate: 300,
+    };
+  } catch {
+    return { props: { category, posts: [] }, revalidate: 60 };
+  }
 };

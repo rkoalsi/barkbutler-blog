@@ -5,7 +5,7 @@
 
 // container
 .container {
-  @apply max-w-[1000px];
+  @apply max-w-[1100px];
 }
 
 // form style
@@ -32,15 +32,15 @@
   }
 }
 
-// social icon style
+// social icons — dark/yellow on light footer, white on dark yellow footer
 .social-icons {
-  @apply space-x-4;
+  @apply space-x-3;
   li {
     @apply inline-block;
     a {
-      @apply block h-12 w-12 rounded-lg border border-light bg-transparent text-center text-white transition hover:border-primary hover:bg-primary;
+      @apply block h-9 w-9 rounded-lg border border-dark/20 dark:border-white/30 bg-transparent text-center text-dark dark:text-white transition hover:border-dark dark:hover:border-white hover:bg-dark/10 dark:hover:bg-white/10;
       svg {
-        @apply m-auto h-12 text-lg;
+        @apply m-auto h-9 text-base;
       }
     }
   }
@@ -51,7 +51,7 @@
   li {
     @apply inline-block;
     a {
-      @apply block p-3 text-dark transition hover:text-primary;
+      @apply block p-3 text-dark dark:text-gray-400 transition hover:text-primary dark:hover:text-primary;
       svg {
         @apply text-lg;
       }
@@ -72,10 +72,14 @@
 // form style
 .form-input,
 .form-textarea {
-  @apply rounded-lg border-border text-text focus:border-primary focus:ring-transparent;
+  @apply rounded-lg border-border dark:border-gray-700 text-dark dark:text-gray-200 dark:bg-gray-800 focus:border-primary focus:ring-transparent;
 }
 
-// content style
+// content style — for rich HTML blog content
 .content {
-  @apply prose max-w-none prose-headings:font-bold prose-h1:mb-4 prose-h1:text-h1-sm prose-h1:text-white prose-h2:mb-4 prose-h2:mt-4 prose-h2:text-h2-sm prose-h2:text-white prose-h3:mt-4 prose-h3:text-h3-sm prose-h3:text-white prose-h4:mt-4 prose-h4:text-white prose-h5:mb-4 prose-h5:text-white prose-h6:mb-6 prose-h6:text-white prose-a:text-white prose-blockquote:border-primary prose-blockquote:bg-theme-light prose-blockquote:p-4 prose-strong:text-white  md:prose-h1:text-h1 md:prose-h2:text-h2 md:prose-h3:text-h3;
+  @apply prose max-w-none dark:prose-invert
+    prose-headings:font-bold prose-headings:text-dark dark:prose-headings:text-gray-100
+    prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+    prose-blockquote:border-primary prose-blockquote:bg-gray-50 dark:prose-blockquote:bg-gray-900 prose-blockquote:p-4
+    prose-strong:text-dark dark:prose-strong:text-gray-200;
 }

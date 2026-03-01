@@ -24,6 +24,7 @@ if (theme.fonts.font_family.secondary) {
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
@@ -49,6 +50,7 @@ module.exports = {
         primary: theme.colors.default.theme_color.primary,
         secondary: theme.colors.default.theme_color.secondary,
         custom_yellow: theme.colors.default.theme_color.custom_yellow,
+        custom_yellow_dark: theme.colors.default.theme_color.custom_yellow_dark,
         body: theme.colors.default.theme_color.body,
         border: theme.colors.default.theme_color.border,
         "theme-light": theme.colors.default.theme_color.theme_light,
